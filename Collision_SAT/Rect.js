@@ -7,14 +7,15 @@ class Rect
         this.bCollided = false;
     }
     
-    draw()
+    render()
     {
-        noStroke();
+        strokeWeight(4);
+        stroke(51);
         if(this.bCollided)
             fill('rgb(0,255,0)');
         else
             fill('red');
-        rect(this.x, this.y, this.width, this.height);
+        rect(this.pos.x, this.pos.y, this.size.x, this.size.y);
     }
     
     toggleCollided(flag)

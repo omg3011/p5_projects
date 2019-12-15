@@ -1,21 +1,47 @@
 
-let r1;
-let r2;
+let _listOfRect = []; // Array of Rect
+let _noOfTile;
+let _tileSize; 
+let _canvasSize;
 
-function setup() {
-    createCanvas(1048, 720);
-    background(1);
+
+function Init()
+{
+    _canvasSize = createVector(1000, 1000);
     
-    let r1_pos = createVector(40, 30);
-    let r2_pos = createVector(40, 200);
-    let r1_scale = createVector(120, 30);
-    let r2_scale = createVector(120, 30);
-    r1 = new Rect(r1_pos, r1_scale);
-    r2 = new Rect(r2_pos, r2_scale);
+    _tileSize = createVector(100, 100);
+    
+    _noOfTile = createVector(
+        _canvasSize.x / _tileSize.x,
+        _canvasSize.y / _tileSize.y        
+    );
+    print(_noOfTile);
 }
 
+function setup() {
+    Init();
+    createCanvas(_canvasSize.x, _canvasSize.y);
+    background(1);
+    
+    for(let x = 0; x < _noOfTile.x; ++x)
+    {
+     _listOfRect[x] = []; //create nested 
+        
+     for(let y = 0; y < _noOfTile.y; ++y)
+     {
+        let newRect = new Rect(createVector(x * _tileSize.x, y * _tileSize.y), createVector(_tileSize.x, _tileSize.y));
+        _listOfRect[x][y] = newRect;         
+     }
+    }
+}
+
+
 function draw() {
-  // put drawing code here
-    r1.draw();
-    r2.draw();
+    for(let x = 0; x < _noOfTile.x; ++x)
+    {
+     for(let y = 0; y < _noOfTile.y; ++y)
+     {
+      _listOfRect[x][y].render();
+     }
+    }
 }
