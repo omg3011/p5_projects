@@ -4,6 +4,7 @@ var _tileSize;
 var _canvasSize;
 
 
+
 //----------------------------------------
 // Custom Function(s)
 //----------------------------------------
@@ -16,6 +17,7 @@ function SetupWindow()
 
 function Init()
 {
+    // Init Tile
     _tileSize = createVector(100, 100);
 
     _noOfTile = createVector(
@@ -29,16 +31,25 @@ function Init()
 
      for(var y = 0; y < _noOfTile.y; ++y)
      {
+         var type = 1; 
+         
+         // Corners
+         if((x == 0 || x == _noOfTile.x-1) || (y == 0 || y == _noOfTile.y - 1))
+             type = -1;
+         
         var newTile = new Tile(
             createVector(x * _tileSize.x, y * _tileSize.y), 
-            createVector(_tileSize.x, _tileSize.y));
+            createVector(_tileSize.x, _tileSize.y),
+            type);
         _listOfTile[x][y] = newTile;
      }
     }
+    
 }
 
 function DisplayGrids()
 {
+    // Draw Map
     for(var x = 0; x < _noOfTile.x; ++x)
     {
      for(var y = 0; y < _noOfTile.y; ++y)
@@ -46,6 +57,7 @@ function DisplayGrids()
       _listOfTile[x][y].renderAll();
      }
     }
+    
 }
 
 
